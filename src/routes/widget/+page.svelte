@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import ChatInterface from '$lib/components/Chat/ChatInterface.svelte';
 </script>
 

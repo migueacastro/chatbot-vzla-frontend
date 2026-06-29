@@ -1,5 +1,10 @@
-<script>
-	let { role, content } = $props();
+<script lang="ts">
+	interface Props {
+		role: 'user' | 'assistant' | 'system';
+		content: string;
+	}
+
+	let { role, content }: Props = $props();
 
 	let isUser = $derived(role === 'user');
 </script>

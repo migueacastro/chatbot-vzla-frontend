@@ -1,6 +1,6 @@
-<script>
+<script lang="ts">
 	import ChatInterface from '$lib/components/Chat/ChatInterface.svelte';
-	import { APP_CONFIG } from '$lib/config.js';
+	import { APP_CONFIG } from '$lib/config';
 </script>
 
 <svelte:head>

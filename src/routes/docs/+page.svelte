@@ -1,7 +1,8 @@
-<script>
+<script lang="ts">
 	import { marked } from 'marked';
+	import type { PageData } from './$types';
 
-	let { data } = $props();
+	let { data }: { data: PageData } = $props();
 	
 	let htmlContent = $derived(marked.parse(data.readme));
 </script>
