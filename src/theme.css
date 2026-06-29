@@ -1,0 +1,93 @@
+/* 
+  =============================================================
+  PALETA DE COLORES - TEMA PERSONALIZADO
+  =============================================================
+*/
+
+/* Variables globales de Tailwind v4 */
+@theme {
+	--color-pale-slate-50: #f2f2f3;
+	--color-pale-slate-100: #e5e4e7;
+	--color-pale-slate-200: #cbcace;
+	--color-pale-slate-300: #b1afb6;
+	--color-pale-slate-400: #97959d;
+	--color-pale-slate-500: #7d7a85;
+	--color-pale-slate-600: #64626a;
+	--color-pale-slate-700: #4b4950;
+	--color-pale-slate-800: #323135;
+	--color-pale-slate-900: #19181b;
+	--color-pale-slate-950: #111113;
+
+	--color-silver-50: #f3f2f2;
+	--color-silver-100: #e6e5e5;
+	--color-silver-200: #cdcbcc;
+	--color-silver-300: #b4b1b2;
+	--color-silver-400: #9b9798;
+	--color-silver-500: #827d7f;
+	--color-silver-600: #686465;
+	--color-silver-700: #4e4b4c;
+	--color-silver-800: #343233;
+	--color-silver-900: #1a1919;
+	--color-silver-950: #121112;
+
+	--color-rosy-granite-50: #f3f2f1;
+	--color-rosy-granite-100: #e7e5e4;
+	--color-rosy-granite-200: #cfcac9;
+	--color-rosy-granite-300: #b7b0ae;
+	--color-rosy-granite-400: #9f9693;
+	--color-rosy-granite-500: #877b78;
+	--color-rosy-granite-600: #6c6360;
+	--color-rosy-granite-700: #514a48;
+	--color-rosy-granite-800: #363130;
+	--color-rosy-granite-900: #1b1918;
+	--color-rosy-granite-950: #131111;
+
+	--color-night-bordeaux-50: #fde8ea;
+	--color-night-bordeaux-100: #fad1d5;
+	--color-night-bordeaux-200: #f5a3ab;
+	--color-night-bordeaux-300: #f07581;
+	--color-night-bordeaux-400: #ec4657;
+	--color-night-bordeaux-500: #e7182d;
+	--color-night-bordeaux-600: #b91324;
+	--color-night-bordeaux-700: #8a0f1b;
+	--color-night-bordeaux-800: #5c0a12;
+	--color-night-bordeaux-900: #2e0509;
+	--color-night-bordeaux-950: #200306;
+
+	--color-shadow-grey-50: #f3f1f1;
+	--color-shadow-grey-100: #e7e4e4;
+	--color-shadow-grey-200: #cfc9c9;
+	--color-shadow-grey-300: #b7aeae;
+	--color-shadow-grey-400: #9f9393;
+	--color-shadow-grey-500: #877878;
+	--color-shadow-grey-600: #6c6060;
+	--color-shadow-grey-700: #514848;
+	--color-shadow-grey-800: #363030;
+	--color-shadow-grey-900: #1b1818;
+	--color-shadow-grey-950: #131111;
+}
+
+/* Tema Claro (Light Mode) */
+[data-theme='light'] {
+	/* Usamos las variables globales de nuestra paleta mediante var() */
+	--color-primary: var(--color-night-bordeaux-600);
+	--color-primary-content: var(--color-night-bordeaux-50);
+
+	--color-base-100: var(--color-rosy-granite-50);
+	--color-base-200: var(--color-rosy-granite-100);
+	--color-base-300: var(--color-rosy-granite-200);
+
+	--color-base-content: var(--color-rosy-granite-900);
+}
+
+/* Tema Oscuro (Dark Mode) */
+[data-theme='dark'] {
+	--color-primary: var(--color-night-bordeaux-500);
+	--color-primary-content: var(--color-night-bordeaux-950);
+
+	--color-base-100: var(--color-rosy-granite-950);
+	--color-base-200: var(--color-rosy-granite-900);
+	--color-base-300: var(--color-rosy-granite-800);
+
+	--color-base-content: var(--color-rosy-granite-50);
+}
