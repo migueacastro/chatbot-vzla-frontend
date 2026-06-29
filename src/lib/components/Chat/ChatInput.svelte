@@ -22,11 +22,11 @@
 </script>
 
 <div class="p-4 bg-base-100 border-t border-base-200 w-full">
-	<div class="join w-full shadow-sm rounded-3xl">
+	<div class="join w-full shadow-sm rounded-3xl h-16 lg:h-[72px]">
 		<!-- Botón de Adjuntar -->
 		<button
 			type="button"
-			class="btn btn-lg join-item bg-base-200 border-base-200 hover:bg-base-300 px-4 lg:px-5"
+			class="btn h-full join-item bg-base-200 border-base-200 hover:bg-base-300 px-4 lg:px-5"
 			aria-label="Adjuntar archivo o imagen"
 		>
 			<svg
@@ -46,7 +46,7 @@
 		<input
 			type="text"
 			placeholder="Haz una pregunta o consulta sobre la emergencia..."
-			class="input input-lg join-item w-full bg-base-200 border-base-200 focus:outline-none placeholder:text-base-content/40 text-lg lg:text-xl"
+			class="input h-full join-item w-full bg-base-200 border-base-200 focus:outline-none placeholder:text-base-content/40 text-sm lg:text-base"
 			bind:value={inputValue}
 			onkeydown={handleKeydown}
 			disabled={isLoading}
@@ -55,7 +55,7 @@
 		<!-- Botón de Enviar -->
 		<button
 			type="button"
-			class="btn btn-lg join-item bg-base-200 border-base-200 hover:bg-base-300 px-4 lg:px-5 text-primary"
+			class="btn h-full join-item bg-base-200 border-base-200 hover:bg-base-300 px-4 lg:px-5 text-primary"
 			onclick={handleSend}
 			disabled={isLoading || !inputValue.trim()}
 			aria-label="Enviar mensaje"

@@ -2,6 +2,7 @@
 	import { page } from '$app/state';
 	import { resolve } from '$app/paths';
 	import { APP_CONFIG } from '$lib/config';
+	import EmergencyPanel from '$lib/components/Chat/EmergencyPanel.svelte';
 
 	let isDark = $state(false);
 	let initialized = false;
@@ -28,8 +29,8 @@
 <header class="w-full bg-base-200 shadow-md px-4 py-3 flex items-center justify-between">
 	<div class="flex items-center gap-4">
 		<!-- Menú móvil colapsable -->
-		<div class="dropdown lg:hidden">
-			<button aria-label="main navigation" class="btn btn-ghost btn-circle p-1">
+		<details class="dropdown lg:hidden">
+			<summary aria-label="main navigation" class="btn btn-ghost btn-circle p-1 list-none cursor-pointer">
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
 					class="h-6 w-6"
@@ -44,10 +45,9 @@
 						d="M4 6h16M4 12h8m-8 6h16"
 					/>
 				</svg>
-			</button>
+			</summary>
 			<ul
-				tabindex="-1"
-				class="dropdown-content mt-3 z-10 w-52 rounded-box bg-base-200 p-2 shadow-lg flex flex-col gap-1"
+				class="dropdown-content mt-3 z-20 w-80 rounded-box bg-base-200 p-3 shadow-lg flex flex-col gap-2 border border-base-300"
 			>
 				<li>
 					<a
@@ -71,8 +71,12 @@
 						Documentación
 					</a>
 				</li>
+				<div class="divider my-1"></div>
+				<div class="w-full">
+					<EmergencyPanel />
+				</div>
 			</ul>
-		</div>
+		</details>
 
 		<!-- Logo / Título -->
 		<a
