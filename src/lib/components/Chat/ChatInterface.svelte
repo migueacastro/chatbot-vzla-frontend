@@ -1,9 +1,9 @@
-<script>
-	import Message from '$lib/components/Chat/Message.svelte';
+<script lang="ts">
+	import MessageComponent from '$lib/components/Chat/Message.svelte';
 	import { marked } from 'marked';
+	import type { Message } from '$lib/types';
 
-	/** @type {Array<{ role: 'user' | 'assistant'; content: string }>} */
-	let messages = $state([]);
+	let messages = $state<Message[]>([]);
 	let inputValue = $state('');
 	let isLoading = $state(false);
 
@@ -14,8 +14,7 @@
 		'ℹ️ Info general del sismo'
 	];
 
-	/** @param {string} text */
-	async function sendMessage(text) {
+	async function sendMessage(text: string) {
 		if (!text.trim() || isLoading) return;
 
 		messages = [...messages, { role: 'user', content: text }];
@@ -60,8 +59,7 @@
 		}
 	}
 
-	/** @param {KeyboardEvent} event */
-	function handleKeydown(event) {
+	function handleKeydown(event: KeyboardEvent) {
 		if (event.key === 'Enter' && !event.shiftKey) {
 			event.preventDefault();
 			sendMessage(inputValue);
@@ -91,7 +89,7 @@
 		{:else}
 			<div class="space-y-4">
 				{#each messages as msg, i (i)}
-					<Message role={msg.role} content={msg.content} />
+					<MessageComponent role={msg.role} content={msg.content} />
 				{/each}
 				{#if isLoading}
 					<div class="chat chat-start">

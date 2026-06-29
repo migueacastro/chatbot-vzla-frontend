@@ -1,7 +1,7 @@
-<script>
+<script lang="ts">
 	import { page } from '$app/state';
 	import { resolve } from '$app/paths';
-	import { APP_CONFIG } from '$lib/config.js';
+	import { APP_CONFIG } from '$lib/config';
 
 	let isDark = $state(false);
 	let initialized = false;

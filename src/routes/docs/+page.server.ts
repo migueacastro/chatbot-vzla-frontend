@@ -1,7 +1,8 @@
 import fs from 'fs';
 import path from 'path';
+import type { PageServerLoad } from './$types';
 
-export function load() {
+export const load: PageServerLoad = () => {
 	try {
 		const readmePath = path.resolve(process.cwd(), 'README.md');
 		const content = fs.readFileSync(readmePath, 'utf-8');
@@ -14,4 +15,4 @@ export function load() {
 			readme: '# Error\nNo se pudo cargar el archivo README.md.'
 		};
 	}
-}
+};
