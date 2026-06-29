@@ -28,6 +28,10 @@ Desarrollar una aplicación accesible, modular y fácilmente integrable que asis
 - **Estado**: ✅ Definido.
 - **Recomendación**: Se sugiere utilizar **Google Gemini 2.0 Flash** (`google/gemini-2.0-flash-001`) o **Llama 3.3 70B Instruct** por su bajo costo, ventana de contexto gigante y velocidad para extracción directa sin rodeos.
 
+### 5. Guía de Estilo de Contenido e Interfaz
+- **Estado**: ✅ Definido.
+- **Directriz**: Evitar el uso de emojis en textos del sistema, opciones predeterminadas, código o comentarios para mantener una interfaz limpia, profesional y sobria acorde a la temática de asistencia en emergencias.
+
 ---
 
 ## Arquitectura y Capas del Proyecto

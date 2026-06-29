@@ -65,29 +65,43 @@
 	--color-shadow-grey-800: #363030;
 	--color-shadow-grey-900: #1b1818;
 	--color-shadow-grey-950: #131111;
+
+	/* Paleta Cremosa Cálida */
+	--color-warm-cream-50: #faf6f0;
+	--color-warm-cream-100: #f4ece1;
+	--color-warm-cream-200: #e8dccb;
+	--color-warm-cream-300: #d8c5ad;
+	--color-warm-cream-400: #c6ac8f;
+	--color-warm-cream-500: #b19273;
+	--color-warm-cream-600: #93775b;
+	--color-warm-cream-700: #715b45;
+	--color-warm-cream-800: #4c3d2e;
+	--color-warm-cream-900: #292119;
+	--color-warm-cream-950: #1b1611;
 }
 
 /* Tema Claro (Light Mode) */
 [data-theme='light'] {
-	/* Usamos las variables globales de nuestra paleta mediante var() */
+	/* Rojo sólido clásico y fondos base cremosos y cálidos */
 	--color-primary: var(--color-night-bordeaux-600);
 	--color-primary-content: var(--color-night-bordeaux-50);
 
-	--color-base-100: var(--color-rosy-granite-50);
-	--color-base-200: var(--color-rosy-granite-100);
-	--color-base-300: var(--color-rosy-granite-200);
+	--color-base-100: var(--color-warm-cream-50);
+	--color-base-200: var(--color-warm-cream-100);
+	--color-base-300: var(--color-warm-cream-200);
 
-	--color-base-content: var(--color-rosy-granite-900);
+	--color-base-content: var(--color-warm-cream-900);
 }
 
 /* Tema Oscuro (Dark Mode) */
 [data-theme='dark'] {
+	/* Rojo sólido y base oscura en tonos café/chocolate cremoso */
 	--color-primary: var(--color-night-bordeaux-500);
 	--color-primary-content: var(--color-night-bordeaux-950);
 
-	--color-base-100: var(--color-rosy-granite-950);
-	--color-base-200: var(--color-rosy-granite-900);
-	--color-base-300: var(--color-rosy-granite-800);
+	--color-base-100: var(--color-warm-cream-950);
+	--color-base-200: var(--color-warm-cream-900);
+	--color-base-300: var(--color-warm-cream-800);
 
-	--color-base-content: var(--color-rosy-granite-50);
+	--color-base-content: var(--color-warm-cream-100);
 }
