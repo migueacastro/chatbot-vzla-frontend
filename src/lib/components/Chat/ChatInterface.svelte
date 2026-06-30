@@ -3,11 +3,14 @@
 	import SuggestedPrompts from '$lib/components/Chat/SuggestedPrompts.svelte';
 	import ChatInput from '$lib/components/Chat/ChatInput.svelte';
 	import { marked } from 'marked';
-	import type { Message } from '$lib/types';
+	import { APP_CONFIG } from '$lib/config';
+	import type { Message, Attachment } from '$lib/types';
 
 	let messages = $state<Message[]>([]);
 	let isLoading = $state(false);
 	let messageContainer = $state<HTMLDivElement | null>(null);
+	let attachedFiles = $state<Attachment[]>([]);
+	let isDragging = $state(false);
 
 	// Efecto para autoscroll optimizado con requestAnimationFrame
 	$effect(() => {
@@ -20,17 +23,65 @@
 		}
 	});
 
-	async function sendMessage(text: string) {
-		if (!text.trim() || isLoading) return;
+	// Manejo de drag and drop
+	function handleDragOver(e: DragEvent) {
+		e.preventDefault();
+		isDragging = true;
+	}
 
-		messages = [...messages, { role: 'user', content: text }];
+	function handleDragLeave(e: DragEvent) {
+		// Evitar parpadeos al pasar por encima de elementos hijos
+		const currentTarget = e.currentTarget as HTMLElement;
+		if (!currentTarget) return;
+		const rect = currentTarget.getBoundingClientRect();
+		const x = e.clientX;
+		const y = e.clientY;
+		if (x < rect.left || x >= rect.right || y < rect.top || y >= rect.bottom) {
+			isDragging = false;
+		}
+	}
+
+	function handleDrop(e: DragEvent) {
+		e.preventDefault();
+		isDragging = false;
+		if (e.dataTransfer?.files) {
+			Array.from(e.dataTransfer.files).forEach((file) => {
+				const reader = new FileReader();
+				reader.onload = (event) => {
+					if (event.target?.result) {
+						attachedFiles.push({
+							name: file.name,
+							url: event.target.result as string,
+							type: file.type
+						});
+					}
+				};
+				reader.readAsDataURL(file);
+			});
+		}
+	}
+
+	async function sendMessage(text: string) {
+		if ((!text.trim() && attachedFiles.length === 0) || isLoading) return;
+
+		// Añadir mensaje del usuario con sus adjuntos clonados
+		messages = [...messages, { role: 'user', content: text, attachments: [...attachedFiles] }];
+
+		// Limpiar los archivos adjuntos locales
+		attachedFiles = [];
 		isLoading = true;
 
 		try {
+			// Enviar al backend limpiando la estructura para que solo reciba texto y no sature la API
+			const messagesForApi = messages.map((msg) => ({
+				role: msg.role,
+				content: msg.content
+			}));
+
 			const response = await fetch('/api/chat', {
 				method: 'POST',
 				headers: { 'Content-Type': 'application/json' },
-				body: JSON.stringify({ messages })
+				body: JSON.stringify({ messages: messagesForApi })
 			});
 
 			if (!response.ok) throw new Error('Error en la red');
@@ -74,18 +125,60 @@
 				{
 					role: 'assistant',
 					content:
-						'<p class="text-error font-medium">Lo siento, ocurrió un error al intentar procesar tu mensaje. Por favor, intenta de nuevo.</p>'
+						'<p class="font-medium">Lo siento, ocurrió un error al intentar procesar tu mensaje. Por favor, intenta de nuevo.</p>',
+					isError: true
 				}
 			];
 		} finally {
 			isLoading = false;
 		}
 	}
+
+	async function handleRetry() {
+		const userMessages = messages.filter((m) => m.role === 'user');
+		if (userMessages.length === 0) return;
+		const lastUserMsg = userMessages[userMessages.length - 1];
+
+		// Eliminar el mensaje de error de la lista
+		messages = messages.filter((m) => !m.isError);
+
+		// Reenviar
+		await sendMessage(lastUserMsg.content);
+	}
 </script>
 
 <div
+	role="region"
 	class="flex flex-col h-full w-full bg-base-100 relative rounded-none md:rounded-3xl overflow-hidden border-x-0 md:border border-base-200"
+	ondragover={handleDragOver}
+	ondragleave={handleDragLeave}
+	ondrop={handleDrop}
 >
+	<!-- Overlay de Drag & Drop -->
+	{#if isDragging}
+		<div
+			class="absolute inset-0 bg-primary/10 border-2 border-dashed border-primary/50 m-4 rounded-2xl flex flex-col items-center justify-center gap-3 z-30 pointer-events-none animate-pulse"
+		>
+			<div class="p-4 bg-primary text-primary-content rounded-full shadow-lg">
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					class="w-8 h-8"
+					fill="none"
+					viewBox="0 0 24 24"
+					stroke="currentColor"
+					stroke-width="2.5"
+				>
+					<path
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"
+					/>
+				</svg>
+			</div>
+			<span class="text-base font-bold text-primary">Suelta tus archivos o imágenes aquí</span>
+		</div>
+	{/if}
+
 	<!-- Área de mensajes -->
 	<div
 		bind:this={messageContainer}
@@ -107,7 +200,13 @@
 		{:else}
 			<div class="space-y-1">
 				{#each messages as msg, i (i)}
-					<MessageComponent role={msg.role} content={msg.content} />
+					<MessageComponent
+						role={msg.role}
+						content={msg.content}
+						attachments={msg.attachments}
+						isError={msg.isError}
+						onRetry={msg.isError ? handleRetry : undefined}
+					/>
 				{/each}
 				{#if isLoading && messages[messages.length - 1]?.role === 'user'}
 					<!-- Esqueleto de carga inicial del asistente -->
@@ -115,7 +214,7 @@
 						<div class="chat-image avatar placeholder">
 							<div class="w-8 rounded-xl bg-base-300"></div>
 						</div>
-						<div class="chat-header text-xs opacity-50 mb-1">Asistente de Emergencia</div>
+						<div class="chat-header text-xs opacity-50 mb-1">{APP_CONFIG.appName}</div>
 						<div class="chat-bubble bg-base-200 text-base-content shadow-sm flex items-center h-12">
 							<span class="loading loading-dots loading-sm opacity-50"></span>
 						</div>
@@ -126,7 +225,7 @@
 	</div>
 
 	<!-- Input de usuario -->
-	<ChatInput {isLoading} onSend={sendMessage} />
+	<ChatInput {isLoading} onSend={sendMessage} bind:attachedFiles />
 
 	<!-- Botón de WhatsApp Flotante -->
 	<a

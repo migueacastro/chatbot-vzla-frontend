@@ -7,7 +7,9 @@
 	];
 </script>
 
-<div class="flex flex-col gap-4 p-4 bg-base-100 border border-base-200 rounded-3xl w-full lg:max-w-sm h-full overflow-y-auto">
+<div
+	class="flex flex-col gap-4 p-4 bg-base-100 border border-base-200 rounded-3xl w-full lg:max-w-sm h-full overflow-y-auto"
+>
 	<div class="px-2">
 		<h2 class="text-xl font-extrabold text-base-content tracking-tight">Contactos Rápidos</h2>
 		<p class="text-xs text-base-content/50">Líneas de emergencia activas 24/7</p>
@@ -16,8 +18,11 @@
 	<ul class="menu bg-base-200 w-full rounded-box gap-2 p-2">
 		{#each contacts as contact (contact.name)}
 			<li>
-				<a href="tel:{contact.phone}" class="flex gap-4 py-3 hover:bg-base-300 transition-colors rounded-xl">
-					<div class="text-primary flex-shrink-0">
+				<a
+					href="tel:{contact.phone}"
+					class="flex gap-4 py-3 hover:bg-base-300 transition-colors rounded-xl"
+				>
+					<div class="text-base-content/60 shrink-0">
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
 							fill="none"
@@ -36,9 +41,11 @@
 					<div class="flex-1 flex flex-col gap-0.5">
 						<div class="flex justify-between items-center w-full">
 							<span class="font-bold text-sm text-base-content">{contact.name}</span>
-							<span class="badge badge-sm badge-ghost text-[10px] uppercase font-semibold">{contact.location}</span>
+							<span class="badge badge-sm badge-ghost text-[10px] uppercase font-semibold"
+								>{contact.location}</span
+							>
 						</div>
-						<span class="text-sm font-semibold text-primary">{contact.phone}</span>
+						<span class="text-sm font-semibold text-base-content/80">{contact.phone}</span>
 					</div>
 				</a>
 			</li>
