@@ -67,7 +67,7 @@
 	<!-- Previsualización de Archivos Adjuntos -->
 	{#if attachedFiles.length > 0}
 		<div class="flex flex-wrap gap-2 px-1">
-			{#each attachedFiles as file, index}
+			{#each attachedFiles as file, index (index)}
 				<div class="relative bg-base-200 rounded-2xl p-2 pr-8 border border-base-300 flex items-center gap-2 max-w-[160px] truncate shadow-sm">
 					{#if file.type.startsWith('image/')}
 						<img src={file.url} alt={file.name} class="w-8 h-8 rounded-lg object-cover border border-base-content/10" />
@@ -137,7 +137,7 @@
 				viewBox="0 0 24 24"
 				stroke-width="2.5"
 				stroke="currentColor"
-				class="w-6 h-6 lg:w-7 lg:h-7 transform rotate-90"
+				class="w-6 h-6 lg:w-7 lg:h-7"
 			>
 				<path stroke-linecap="round" stroke-linejoin="round" d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5" />
 			</svg>
