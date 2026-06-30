@@ -12,7 +12,7 @@
 </svelte:head>
 
 <div class="container mx-auto max-w-4xl p-6 md:p-12 min-h-screen">
-	<div class="prose prose-lg md:prose-xl mx-auto">
+	<div class="prose prose-sm md:prose-base mx-auto">
 		<!-- eslint-disable-next-line svelte/no-at-html-tags -->
 		{@html htmlContent}
 	</div>

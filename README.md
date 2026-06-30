@@ -1,42 +1,60 @@
-# sv
+# Chatbot Vzla - Frontend de Asistencia de Emergencia
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+Frontend oficial del Chatbot de Asistencia Terremoto Venezuela desarrollado en Svelte 5 y SvelteKit para centralizar información y consultas críticas de ayuda.
 
-## Creating a project
+---
 
-If you're seeing this, you've probably already done this step. Congrats!
+## Integración como Widget (Embedding)
 
-```sh
-# create a new project
-npx sv create my-app
+Para embeber este chatbot en cualquier sitio web externo, utiliza la ruta `/widget` en un iframe. Esta vista está optimizada para responsive y oculta elementos de navegación externos.
+
+### Código HTML:
+
+```html
+<iframe 
+  src="https://chatbot-vzla-frontend.vercel.app/widget" 
+  width="100%" 
+  height="700" 
+  style="border: none; border-radius: 24px; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);"
+  title="Chatbot de Asistencia - Terremoto Venezuela"
+  allow="clipboard-write"
+></iframe>
 ```
 
-To recreate this project with the same configuration:
+> [!IMPORTANT]
+> El atributo `allow="clipboard-write"` es obligatorio para permitir la funcionalidad de copiado de mensajes al portapapeles desde el iframe.
 
-```sh
-# recreate this project
-npx sv@0.16.1 create --template minimal --types jsdoc --add prettier eslint playwright tailwindcss="plugins:typography" sveltekit-adapter="adapter:vercel" mcp="ide:gemini+setup:remote" --install npm ./
+---
+
+## Desarrollo Local
+
+### Instalación
+```bash
+pnpm install
 ```
 
-## Developing
+### Configuración
+Copia `.env.example` a `.env` y añade tus credenciales:
+```bash
+cp .env.example .env
+```
+* `OPENROUTER_API_KEY`: API key para los modelos de lenguaje de OpenRouter.
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+### Ejecución
+```bash
+pnpm run dev
+```
+Acceso en local: [http://localhost:5173](http://localhost:5173).
 
-```sh
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
+### Producción
+```bash
+pnpm run build
+pnpm run preview
 ```
 
-## Building
+---
 
-To create a production version of your app:
-
-```sh
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+## Tecnologías y Características
+* Core: Svelte 5 + SvelteKit.
+* Estilizado: Tailwind CSS v4 + DaisyUI v5.
+* Funcionalidades: Carga de archivos por drag & drop, streaming de respuestas, copiado de mensajes y botón de reintento ante errores.
