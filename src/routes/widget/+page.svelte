@@ -12,8 +12,8 @@
 </svelte:head>
 
 <div class="w-full h-screen bg-base-100 m-0 p-0 flex flex-col overflow-hidden min-w-[260px]" data-theme={theme}>
-	<!-- Navbar Resaltado del Widget -->
-	<div class="navbar bg-primary text-primary-content min-h-12 h-12 flex justify-center items-center px-4 shrink-0 shadow-md">
+	<!-- Navbar del Widget (Crema bg-base-200 en Claro, Marrón bg-base-300 en Oscuro) -->
+	<div class="navbar min-h-12 h-12 flex justify-center items-center px-4 shrink-0 shadow-md border-b {theme === 'light' ? 'bg-base-200 text-base-content border-base-300' : 'bg-base-300 text-base-content border-base-300'}">
 		<h1 class="text-xs sm:text-sm font-extrabold tracking-wide text-center truncate">
 			{APP_CONFIG.appName}
 		</h1>
