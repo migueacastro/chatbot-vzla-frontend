@@ -4,7 +4,7 @@
 
 	let { data }: { data: PageData } = $props();
 	
-	let htmlContent = $derived(marked.parse(data.readme));
+	let htmlContent = $derived((marked.parse(data.readme) as string).replace(/src="(\.\/)?static\//g, 'src="/'));
 </script>
 
 <svelte:head>
