@@ -96,7 +96,7 @@
 		<!-- Botón de Adjuntar -->
 		<button
 			type="button"
-			class="btn h-full join-item bg-base-200 border-base-200 hover:bg-base-300 px-4 lg:px-5"
+			class="btn h-full join-item bg-base-300 border-base-300 hover:bg-base-300/70 px-4 lg:px-5"
 			onclick={triggerFileInput}
 			aria-label="Adjuntar archivo o imagen"
 		>
@@ -104,12 +104,11 @@
 				xmlns="http://www.w3.org/2000/svg"
 				fill="none"
 				viewBox="0 0 24 24"
-				stroke-width="2"
+				stroke-width="2.5"
 				stroke="currentColor"
 				class="w-6 h-6 lg:w-7 lg:h-7 opacity-60"
 			>
-				<path stroke-linecap="round" stroke-linejoin="round" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636m12.728 12.728L5.636 5.636" />
-				<path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9" />
+				<path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
 			</svg>
 		</button>
 
@@ -117,7 +116,7 @@
 		<input
 			type="text"
 			placeholder="Haz una pregunta o consulta sobre la emergencia..."
-			class="input h-full join-item w-full bg-base-200 border-base-200 focus:outline-none placeholder:text-base-content/40 text-sm lg:text-base"
+			class="input h-full join-item w-full bg-base-300/80 border-base-300 focus:outline-none placeholder:text-base-content/40 text-sm lg:text-base"
 			bind:value={inputValue}
 			onkeydown={handleKeydown}
 			disabled={isLoading}
@@ -126,7 +125,7 @@
 		<!-- Botón de Enviar -->
 		<button
 			type="button"
-			class="btn h-full join-item bg-base-200 border-base-200 hover:bg-base-300 px-4 lg:px-5 text-base-content/70"
+			class="btn h-full join-item bg-base-300 border-base-300 hover:bg-base-300/70 px-4 lg:px-5 text-base-content/70"
 			onclick={handleSend}
 			disabled={isLoading || (!inputValue.trim() && attachedFiles.length === 0)}
 			aria-label="Enviar mensaje"
